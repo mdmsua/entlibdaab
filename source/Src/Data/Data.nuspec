@@ -16,9 +16,4 @@
       <frameworkAssembly assemblyName="mscorlib" targetFramework=".NETFramework4.5" />
     </frameworkAssemblies>
   </metadata>
-  <files>
-    <file src="NuGet\Readme.txt" target="" />
-    <file src="NuGet\tools\SharedCommon\install.ps1" target="tools" />
-    <file src="NuGet\tools\SharedCommon\Utils.psm1" target="tools" />
-  </files>
 </package>
