@@ -223,6 +223,7 @@
     <None Include="..\..\DataAccess.licenseheader">
       <Link>DataAccess.licenseheader</Link>
     </None>
+    <None Include="Data.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
