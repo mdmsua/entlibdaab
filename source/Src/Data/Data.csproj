@@ -143,6 +143,7 @@
     <Compile Include="DatabaseConnectionWrapper.cs" />
     <Compile Include="DatabaseExtensions.cs" />
     <Compile Include="DataReaderWrapper.cs" />
+    <Compile Include="DbCommandExtensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IParameterMapper.cs" />
     <Compile Include="IResultSetMapper.cs" />
