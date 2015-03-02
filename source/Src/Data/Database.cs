@@ -1079,7 +1079,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.Data
             {
                     connection = CreateConnection();
                     connection.Open();
-                    connection.SetContextInfo();
+                    ContextInfo.Set(connection);
             }
             catch
             {
