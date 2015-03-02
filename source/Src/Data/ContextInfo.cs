@@ -42,22 +42,51 @@ namespace Microsoft.Practices.EnterpriseLibrary.Data
         private static string role;
 
         /// <summary>
-        /// Sets context info.
+        /// Gets or sets the user.
         /// </summary>
-        /// <param name="userName">
-        /// The user.
-        /// </param>
-        /// <param name="customerAbbreviation">
-        /// The customer.
-        /// </param>
-        /// <param name="roleKey">
-        /// The role.
-        /// </param>
-        public static void Set(string userName = null, string customerAbbreviation = null, string roleKey = null)
+        public static string User
         {
-            user = userName;
-            customer = customerAbbreviation;
-            role = roleKey;
+            get
+            {
+                return user;
+            }
+
+            set
+            {
+                user = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the role.
+        /// </summary>
+        public static string Role
+        {
+            get
+            {
+                return role;
+            }
+
+            set
+            {
+                role = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the customer.
+        /// </summary>
+        public static string Customer
+        {
+            get
+            {
+                return customer;
+            }
+
+            set
+            {
+                customer = value;
+            }
         }
 
         /// <summary>
