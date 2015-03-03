@@ -6,11 +6,9 @@
 //   The context info.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Microsoft.Practices.EnterpriseLibrary.Data
 {
     using System.Data;
-    using System.Data.Common;
     using System.Security.Claims;
     using System.Threading;
 
@@ -30,7 +28,21 @@ namespace Microsoft.Practices.EnterpriseLibrary.Data
         /// <param name="connection">
         /// The connection.
         /// </param>
-        public static void Set(DbConnection connection)
+        public static void Set(IDbConnection connection)
+        {
+            Set(connection, null);
+        }
+
+        /// <summary>
+        /// Sets context info and executes stored procedure on the connection.
+        /// </summary>
+        /// <param name="connection">
+        /// The connection.
+        /// </param>
+        /// <param name="transaction">
+        /// The transaction.
+        /// </param>
+        public static void Set(IDbConnection connection, IDbTransaction transaction)
         {
             using (var command = connection.CreateCommand())
             {
@@ -38,6 +50,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.Data
                 command.CommandText = CommandText;
                 command.CommandType = CommandType.StoredProcedure;
                 command.Connection = connection;
+                command.Transaction = transaction;
                 command.ExecuteNonQuery();
                 command.Connection = null;
             }
@@ -49,7 +62,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.Data
         /// <param name="command">
         /// The command.
         /// </param>
-        private static void AssignParameters(DbCommand command)
+        private static void AssignParameters(IDbCommand command)
         {
             var claimsIdentity = Thread.CurrentPrincipal.Identity as ClaimsIdentity;
             if (claimsIdentity == null)
@@ -64,7 +77,6 @@ namespace Microsoft.Practices.EnterpriseLibrary.Data
             var userParameter = command.CreateParameter();
             userParameter.DbType = DbType.String;
             userParameter.Direction = ParameterDirection.Input;
-            userParameter.IsNullable = true;
             userParameter.ParameterName = "@User";
             userParameter.Value = user;
             command.Parameters.Add(userParameter);
@@ -72,7 +84,6 @@ namespace Microsoft.Practices.EnterpriseLibrary.Data
             var roleParameter = command.CreateParameter();
             roleParameter.DbType = DbType.String;
             roleParameter.Direction = ParameterDirection.Input;
-            roleParameter.IsNullable = true;
             roleParameter.ParameterName = "@Role";
             roleParameter.Value = role;
             command.Parameters.Add(roleParameter);
@@ -80,7 +91,6 @@ namespace Microsoft.Practices.EnterpriseLibrary.Data
             var customerParameter = command.CreateParameter();
             customerParameter.DbType = DbType.String;
             customerParameter.Direction = ParameterDirection.Input;
-            customerParameter.IsNullable = true;
             customerParameter.ParameterName = "@Customer";
             customerParameter.Value = system;
             command.Parameters.Add(customerParameter);
